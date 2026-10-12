@@ -1,0 +1,67 @@
+:root {
+    --bg: #11111b;
+    --fg: #313244;
+    --muted: #6c7086;
+    --text: #cdd6f4;
+    --titlebar-height: calc(env(titlebar-area-height, 39px));
+
+    color-scheme: dark;
+    font-family:
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        sans-serif;
+    font-size: 14px;
+    color: var(--fg);
+    background: var(--bg);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.titlebar {
+    flex: none;
+    display: flex;
+    align-items: center;
+    height: var(--titlebar-height);
+    padding-left: calc(env(titlebar-area-x, 0px) + 12px);
+    padding-right: calc(
+        100vw - env(titlebar-area-x, 0px) - env(titlebar-area-width, 100vw) +
+            12px
+    );
+    user-select: none;
+    -webkit-app-region: drag;
+}
+
+/* Anything interactive in the titlebar needs this or clicks will drag the window. */
+.titlebar :is(button, input, select, a) {
+    -webkit-app-region: no-drag;
+}
+
+.titlebar-title {
+    font-weight: 400;
+    color: var(--text);
+}
+
+.content {
+    flex: 1;
+    overflow: auto;
+    padding: 16px;
+}
